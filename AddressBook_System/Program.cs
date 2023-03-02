@@ -7,7 +7,9 @@ namespace AddressBook_System
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book Program");
-            AddressBook ab = new AddressBook();
+            AddressBook addressbook = new AddressBook();
+            AddressBooks addressbooks = new AddressBooks();
+
             bool t = true;
             while (t)
             {
@@ -16,22 +18,27 @@ namespace AddressBook_System
                 switch (ch)
                 {
                     case 1:
-                        ab.AddContact();
+                        addressbook.AddContact();
                         break;
                     case 2:
-                        ab.DisplayContact();
+                        addressbook.DisplayContact();
                         break;
                     case 3:
                         Console.WriteLine("Enter the firstname to edit ");
                         string firstName = Console.ReadLine();
-                        ab.EditContact(firstName);
+                        addressbook.EditContact(firstName);
                         break;
                     case 4:
                         Console.WriteLine("Enter the firstname to delete ");
                         string name = Console.ReadLine();
-                        ab.DeleteContact(name);
+                        addressbook.DeleteContact(name);
                         break;
                     case 5:
+                        Console.WriteLine("Enter name for address book");
+                        string addressbookname = Console.ReadLine();
+                        addressbooks.AddToAddressBook(addressbookname, addressbook.contacts);
+                        break;
+                    case 6:
                         t = false;
                         break;
 

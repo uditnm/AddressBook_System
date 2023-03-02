@@ -8,7 +8,7 @@ namespace AddressBook_System
 {
     internal class AddressBook
     {
-        List<Contacts> contacts = new List<Contacts>();
+        public List<Contacts> contacts = new List<Contacts>();
         public void AddContact()
         {
             Console.WriteLine("Enter the firstName: ");
@@ -96,5 +96,14 @@ namespace AddressBook_System
             
         }
 
+    }
+
+    internal class AddressBooks
+    {
+        Dictionary<string,List<Contacts>> addressbook = new Dictionary<string,List<Contacts>>();
+        public void AddToAddressBook(string name, List<Contacts> contacts)
+        {
+            addressbook.Add(name, contacts);
+        }
     }
 }
