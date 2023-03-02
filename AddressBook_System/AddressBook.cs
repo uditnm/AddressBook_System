@@ -59,7 +59,20 @@ namespace AddressBook_System
                 }
             }
 
-            Console.WriteLine("The name wasn't found");
+            Console.WriteLine("The name was not found");
+        }
+
+        public void DeleteContact(string firstname)
+        {
+            foreach (Contacts contact in contacts)
+            {
+                if (contact.firstname == firstname)
+                {
+                    contacts.Remove(contact);
+                    break;
+                }
+            }
+            Console.WriteLine("The name was not found");
         }
 
 
