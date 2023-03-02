@@ -32,6 +32,37 @@ namespace AddressBook_System
             contacts.Add(contact);
         }
 
+        public void EditContact(string firstname)
+        {
+            foreach(Contacts contact in contacts)
+            {
+                if(contact.firstname==firstname)
+                {
+                    Console.WriteLine("Enter the firstName: ");
+                    contact.firstname = Console.ReadLine();
+                    Console.WriteLine("Enter the lastName: ");
+                    contact.lastname = Console.ReadLine();
+                    Console.WriteLine("Enter the address: ");
+                    contact.address = Console.ReadLine();
+                    Console.WriteLine("Enter the city: ");
+                    contact.city = Console.ReadLine();
+                    Console.WriteLine("Enter the state: ");
+                    contact.state = Console.ReadLine();
+                    Console.WriteLine("Enter the zip: ");
+                    contact.zip = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter the phone number: ");
+                    contact.phoneno = Convert.ToInt64(Console.ReadLine());
+                    Console.WriteLine("Enter the email: ");
+                    contact.email = Console.ReadLine();
+
+                    break;
+                }
+            }
+
+            Console.WriteLine("The name wasn't found");
+        }
+
+
         public void DisplayContact()
         {
             int id = 1;
