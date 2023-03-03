@@ -13,10 +13,32 @@ namespace AddressBook_System
         public Dictionary<string, List<Contacts>> stateContacts = new Dictionary<string, List<Contacts>>();
 
 
-        public void AddToAddressBook(string name, List<Contacts> contacts)
+        public void AddToAddressBook(string name, AddressBook contact)
         {
-            addressbook.Add(name, contacts);
+            addressbook.Add(name, contact.contacts);
+            contact.contacts.Clear();
 
+        }
+
+        public void DisplayAddressBooks()
+        {
+            foreach(var contacts in addressbook)
+            {
+                Console.WriteLine(contacts.Key);
+                Console.WriteLine("---------------------");
+                foreach (Contacts contact in contacts.Value)
+                {
+                    Console.WriteLine("firstName: " + contact.firstname);
+                    Console.WriteLine("lastName: " + contact.lastname);
+                    Console.WriteLine("address: " + contact.address);
+                    Console.WriteLine("city: " + contact.city);
+                    Console.WriteLine("state: " + contact.state);
+                    Console.WriteLine("zip: " + contact.zip);
+                    Console.WriteLine("phone number: " + contact.phoneno);
+                    Console.WriteLine("email: " + contact.email);
+                    Console.WriteLine("\n");
+                }
+            }
         }
 
         public void SearchbyCityorState(string placename)
@@ -46,7 +68,7 @@ namespace AddressBook_System
             foreach(var contacts in cityContacts)
             {
                 Console.WriteLine(contacts.Key);
-                Console.WriteLine();
+                Console.WriteLine("---------------------");
                 foreach (Contacts contact in contacts.Value)
                 {
                     Console.WriteLine("firstName: " + contact.firstname);
@@ -67,7 +89,7 @@ namespace AddressBook_System
             foreach (var contacts in stateContacts)
             {
                 Console.WriteLine(contacts.Key);
-                Console.WriteLine();
+                Console.WriteLine("---------------------");
                 foreach (Contacts contact in contacts.Value)
                 {
                     Console.WriteLine("firstName: " + contact.firstname);

@@ -136,5 +136,11 @@ namespace AddressBook_System
             return false;
         }
 
+        public void SortContacts()
+        {
+            contacts = contacts.OrderBy(contact => contact.firstname).ToList();
+            DisplayContact();
+        }
+
     }
 }

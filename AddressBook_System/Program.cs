@@ -14,8 +14,9 @@ namespace AddressBook_System
             while (t)
             {
                 Console.WriteLine("\n1.Add Contact \n2.View Contacts \n3.Edit Contacts \n4.Delete Contact " +
-                    "\n5.Add new AddressBook \n6.Search for people in a city or state \n7.View persons by city " +
-                    "\n8.View persons by state \n9.Display count by city \n10.Display count by state \n11.Exit");
+                    "\n5.Add new AddressBook \n6.View Address books \n7.Search for people in a city or state \n8.View persons by city " +
+                    "\n9.View persons by state \n10.Display count by city \n11.Display count by state \n12.Sort " +
+                    "person details by name \n13.Exit");
                 int ch = Convert.ToInt32(Console.ReadLine());
                 switch (ch)
                 {
@@ -38,26 +39,32 @@ namespace AddressBook_System
                     case 5:
                         Console.WriteLine("Enter name for address book");
                         string addressbookname = Console.ReadLine();
-                        addressbooks.AddToAddressBook(addressbookname, addressbook.contacts);
+                        addressbooks.AddToAddressBook(addressbookname, addressbook);
                         break;
                     case 6:
+                        addressbooks.DisplayAddressBooks();
+                        break;
+                    case 7:
                         Console.WriteLine("Enter the city or state name: ");
                         string place = Console.ReadLine();
                         addressbooks.SearchbyCityorState(place);
                         break;
-                    case 7:
+                    case 8:
                         addressbooks.DisplayByCity();
                         break;
-                    case 8:
+                    case 9:
                         addressbooks.DisplayByState();
                         break;
-                    case 9:
+                    case 10:
                         addressbooks.CountbyCity();
                         break;
-                    case 10:
+                    case 11:
                         addressbooks.CountbyState();
                         break;
-                    case 11:
+                    case 12:
+                        addressbook.SortContacts();
+                        break;
+                    case 13:
                         t = false;
                         break;
 
