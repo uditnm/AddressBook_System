@@ -134,5 +134,24 @@ namespace AddressBook_System
             DisplayContact();
         }
 
+        public void SortContactsbyPlace()
+        {
+            Console.WriteLine("Sort by: \n1.City \n2.State \n3.Zip");
+            int ch = Convert.ToInt32(Console.ReadLine());
+            switch (ch)
+            {
+                case 1:
+                    contacts = contacts.OrderBy(contact => contact.city).ToList();
+                    break;
+                case 2:
+                    contacts = contacts.OrderBy(contact => contact.state).ToList();
+                    break;
+                case 3:
+                    contacts = contacts.OrderBy(contact => contact.zip).ToList();
+                    break;
+            }
+            
+            DisplayContact();
+        }
     }
 }
