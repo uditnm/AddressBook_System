@@ -81,7 +81,7 @@ namespace AddressBook_System
                     break;
                 }
             }
-            Console.WriteLine("The name was not found");
+            //Console.WriteLine("The name was not found");
         }
 
 
@@ -117,14 +117,5 @@ namespace AddressBook_System
             return false;
         }
 
-    }
-
-    internal class AddressBooks
-    {
-        Dictionary<string,List<Contacts>> addressbook = new Dictionary<string,List<Contacts>>();
-        public void AddToAddressBook(string name, List<Contacts> contacts)
-        {
-            addressbook.Add(name, contacts);
-        }
     }
 }

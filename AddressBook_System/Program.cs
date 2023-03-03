@@ -14,7 +14,7 @@ namespace AddressBook_System
             while (t)
             {
                 Console.WriteLine("\n1.Add Contact \n2.View Contacts \n3.Edit Contacts \n4.Delete Contact " +
-                    "\n5.Add new AddressBook \n6.Exit");
+                    "\n5.Add new AddressBook \n6.Search for people in a city or state \n7.Exit");
                 int ch = Convert.ToInt32(Console.ReadLine());
                 switch (ch)
                 {
@@ -40,6 +40,11 @@ namespace AddressBook_System
                         addressbooks.AddToAddressBook(addressbookname, addressbook.contacts);
                         break;
                     case 6:
+                        Console.WriteLine("Enter the city or state name: ");
+                        string place = Console.ReadLine();
+                        addressbooks.SearchbyCityorState(place);
+                        break;
+                    case 7:
                         t = false;
                         break;
 
