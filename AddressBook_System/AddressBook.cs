@@ -9,7 +9,7 @@ namespace AddressBook_System
     internal class AddressBook
     {
         public List<Contacts> contacts = new List<Contacts>();
-        public void AddContact()
+        public void AddContact(AddressBooks addressbooks)
         {
             Console.WriteLine("Enter the firstName: ");
             string firstName = Console.ReadLine();
@@ -37,6 +37,25 @@ namespace AddressBook_System
             else
             {
                 contacts.Add(contact);
+                if(addressbooks.cityContacts.ContainsKey(city))
+                {
+                    addressbooks.cityContacts[city].Add(contact);
+                }
+                else
+                {
+                    addressbooks.cityContacts.Add(city, new List<Contacts>{ contact});
+                }
+
+                if (addressbooks.stateContacts.ContainsKey(state))
+                {
+                    addressbooks.stateContacts[state].Add(contact);
+                }
+                else
+                {
+                    addressbooks.stateContacts.Add(state, new List<Contacts> { contact });
+                }
+
+                
             }
             
         }

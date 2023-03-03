@@ -14,12 +14,13 @@ namespace AddressBook_System
             while (t)
             {
                 Console.WriteLine("\n1.Add Contact \n2.View Contacts \n3.Edit Contacts \n4.Delete Contact " +
-                    "\n5.Add new AddressBook \n6.Search for people in a city or state \n7.Exit");
+                    "\n5.Add new AddressBook \n6.Search for people in a city or state \n7.View persons by city " +
+                    "\n8.View persons by state \n9.Exit");
                 int ch = Convert.ToInt32(Console.ReadLine());
                 switch (ch)
                 {
                     case 1:
-                        addressbook.AddContact();
+                        addressbook.AddContact(addressbooks);
                         break;
                     case 2:
                         addressbook.DisplayContact();
@@ -45,6 +46,12 @@ namespace AddressBook_System
                         addressbooks.SearchbyCityorState(place);
                         break;
                     case 7:
+                        addressbooks.DisplayByCity();
+                        break;
+                    case 8:
+                        addressbooks.DisplayByState();
+                        break;
+                    case 9:
                         t = false;
                         break;
 

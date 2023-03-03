@@ -9,9 +9,14 @@ namespace AddressBook_System
     internal class AddressBooks
     {
         Dictionary<string, List<Contacts>> addressbook = new Dictionary<string, List<Contacts>>();
+        public Dictionary<string, List<Contacts>> cityContacts = new Dictionary<string, List<Contacts>>();
+        public Dictionary<string, List<Contacts>> stateContacts = new Dictionary<string, List<Contacts>>();
+
+
         public void AddToAddressBook(string name, List<Contacts> contacts)
         {
             addressbook.Add(name, contacts);
+
         }
 
         public void SearchbyCityorState(string placename)
@@ -32,6 +37,48 @@ namespace AddressBook_System
                         Console.WriteLine("email: " + contact.email);
                         Console.WriteLine("\n");
                     }
+                }
+            }
+        }
+
+        public void DisplayByCity()
+        {
+            foreach(var contacts in cityContacts)
+            {
+                Console.WriteLine(contacts.Key);
+                Console.WriteLine();
+                foreach (Contacts contact in contacts.Value)
+                {
+                    Console.WriteLine("firstName: " + contact.firstname);
+                    Console.WriteLine("lastName: " + contact.lastname);
+                    Console.WriteLine("address: " + contact.address);
+                    Console.WriteLine("city: " + contact.city);
+                    Console.WriteLine("state: " + contact.state);
+                    Console.WriteLine("zip: " + contact.zip);
+                    Console.WriteLine("phone number: " + contact.phoneno);
+                    Console.WriteLine("email: " + contact.email);
+                    Console.WriteLine("\n");
+                }
+            }
+        }
+
+        public void DisplayByState()
+        {
+            foreach (var contacts in stateContacts)
+            {
+                Console.WriteLine(contacts.Key);
+                Console.WriteLine();
+                foreach (Contacts contact in contacts.Value)
+                {
+                    Console.WriteLine("firstName: " + contact.firstname);
+                    Console.WriteLine("lastName: " + contact.lastname);
+                    Console.WriteLine("address: " + contact.address);
+                    Console.WriteLine("city: " + contact.city);
+                    Console.WriteLine("state: " + contact.state);
+                    Console.WriteLine("zip: " + contact.zip);
+                    Console.WriteLine("phone number: " + contact.phoneno);
+                    Console.WriteLine("email: " + contact.email);
+                    Console.WriteLine("\n");
                 }
             }
         }
