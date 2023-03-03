@@ -29,7 +29,16 @@ namespace AddressBook_System
             string email = Console.ReadLine();
 
             Contacts contact = new Contacts(firstName, lastName, address, city, state,zip, phoneno,email);
-            contacts.Add(contact);
+
+            if (CheckDuplicate(contact))
+            {
+                Console.WriteLine("Name already exists!");
+            }
+            else
+            {
+                contacts.Add(contact);
+            }
+            
         }
 
         public void EditContact(string firstname)
@@ -94,6 +103,18 @@ namespace AddressBook_System
                 id++;
             }
             
+        }
+
+        bool CheckDuplicate(Contacts newcontact)
+        {
+            foreach(Contacts contact in contacts)
+            {
+                if(contact.Equals(newcontact))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }

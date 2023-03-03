@@ -23,5 +23,15 @@ namespace AddressBook_System
             this.phoneno = phoneno;
             this.email = email;
         }
+
+        public override bool Equals(object? obj)
+        {
+            if(obj==null)
+                return false;
+
+            if(!(obj is Contacts)) return false;
+
+            return (this.firstname == ((Contacts)obj).firstname) && (this.lastname == ((Contacts)obj).lastname);
+        }
     }
 }
