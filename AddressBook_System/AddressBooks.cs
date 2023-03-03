@@ -82,5 +82,25 @@ namespace AddressBook_System
                 }
             }
         }
+
+        public void CountbyCity()
+        {
+            Console.WriteLine("Count by city: ");
+            foreach (var contacts in cityContacts)
+            {
+                Console.WriteLine(contacts.Key);
+                Console.WriteLine(contacts.Value.Count);
+            }
+        }
+
+        public void CountbyState()
+        {
+            Console.WriteLine("Count by state: ");
+            foreach (var contacts in stateContacts)
+            {
+                Console.WriteLine(contacts.Key);
+                Console.WriteLine(contacts.Value.Count);
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace AddressBook_System
             {
                 Console.WriteLine("\n1.Add Contact \n2.View Contacts \n3.Edit Contacts \n4.Delete Contact " +
                     "\n5.Add new AddressBook \n6.Search for people in a city or state \n7.View persons by city " +
-                    "\n8.View persons by state \n9.Exit");
+                    "\n8.View persons by state \n9.Display count by city \n10.Display count by state \n11.Exit");
                 int ch = Convert.ToInt32(Console.ReadLine());
                 switch (ch)
                 {
@@ -52,6 +52,12 @@ namespace AddressBook_System
                         addressbooks.DisplayByState();
                         break;
                     case 9:
+                        addressbooks.CountbyCity();
+                        break;
+                    case 10:
+                        addressbooks.CountbyState();
+                        break;
+                    case 11:
                         t = false;
                         break;
 
