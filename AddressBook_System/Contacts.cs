@@ -33,5 +33,13 @@ namespace AddressBook_System
 
             return (this.firstname == ((Contacts)obj).firstname) && (this.lastname == ((Contacts)obj).lastname);
         }
+
+        public override string ToString()
+        {
+            return "firstName: " + firstname + "\n" + "lastName: " + lastname + "\n" +
+                "address: " + address + "\n" + "city: " + city + "\n" + "state: " + state + "\n" +
+                "zip: " + zip + "\n" + "phone number: " + phoneno + "\n" + "email: " + email;
+            
+        }
     }
 }

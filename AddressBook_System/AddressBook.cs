@@ -110,15 +110,7 @@ namespace AddressBook_System
             foreach(Contacts contact in contacts)
             {
                 Console.WriteLine("Contact {0}", id);
-                Console.WriteLine("firstName: "+contact.firstname);
-                Console.WriteLine("lastName: "+contact.lastname);
-                Console.WriteLine("address: "+contact.address);
-                Console.WriteLine("city: "+contact.city);
-                Console.WriteLine("state: "+contact.state);
-                Console.WriteLine("zip: "+contact.zip);
-                Console.WriteLine("phone number: "+contact.phoneno);
-                Console.WriteLine("email: "+contact.email);
-                Console.WriteLine("\n");
+                Console.WriteLine(contact.ToString());
                 id++;
             }
             

@@ -28,14 +28,7 @@ namespace AddressBook_System
                 Console.WriteLine("---------------------");
                 foreach (Contacts contact in contacts.Value)
                 {
-                    Console.WriteLine("firstName: " + contact.firstname);
-                    Console.WriteLine("lastName: " + contact.lastname);
-                    Console.WriteLine("address: " + contact.address);
-                    Console.WriteLine("city: " + contact.city);
-                    Console.WriteLine("state: " + contact.state);
-                    Console.WriteLine("zip: " + contact.zip);
-                    Console.WriteLine("phone number: " + contact.phoneno);
-                    Console.WriteLine("email: " + contact.email);
+                    Console.WriteLine(contact.ToString());
                     Console.WriteLine("\n");
                 }
             }
@@ -49,14 +42,7 @@ namespace AddressBook_System
                 {
                     if(contact.city==placename || contact.state == placename)
                     {
-                        Console.WriteLine("firstName: " + contact.firstname);
-                        Console.WriteLine("lastName: " + contact.lastname);
-                        Console.WriteLine("address: " + contact.address);
-                        Console.WriteLine("city: " + contact.city);
-                        Console.WriteLine("state: " + contact.state);
-                        Console.WriteLine("zip: " + contact.zip);
-                        Console.WriteLine("phone number: " + contact.phoneno);
-                        Console.WriteLine("email: " + contact.email);
+                        contact.ToString();
                         Console.WriteLine("\n");
                     }
                 }
@@ -71,14 +57,7 @@ namespace AddressBook_System
                 Console.WriteLine("---------------------");
                 foreach (Contacts contact in contacts.Value)
                 {
-                    Console.WriteLine("firstName: " + contact.firstname);
-                    Console.WriteLine("lastName: " + contact.lastname);
-                    Console.WriteLine("address: " + contact.address);
-                    Console.WriteLine("city: " + contact.city);
-                    Console.WriteLine("state: " + contact.state);
-                    Console.WriteLine("zip: " + contact.zip);
-                    Console.WriteLine("phone number: " + contact.phoneno);
-                    Console.WriteLine("email: " + contact.email);
+                    Console.WriteLine(contact.ToString());
                     Console.WriteLine("\n");
                 }
             }
@@ -92,14 +71,7 @@ namespace AddressBook_System
                 Console.WriteLine("---------------------");
                 foreach (Contacts contact in contacts.Value)
                 {
-                    Console.WriteLine("firstName: " + contact.firstname);
-                    Console.WriteLine("lastName: " + contact.lastname);
-                    Console.WriteLine("address: " + contact.address);
-                    Console.WriteLine("city: " + contact.city);
-                    Console.WriteLine("state: " + contact.state);
-                    Console.WriteLine("zip: " + contact.zip);
-                    Console.WriteLine("phone number: " + contact.phoneno);
-                    Console.WriteLine("email: " + contact.email);
+                    Console.WriteLine(contact.ToString());
                     Console.WriteLine("\n");
                 }
             }
