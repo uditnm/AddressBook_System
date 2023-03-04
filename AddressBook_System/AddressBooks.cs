@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -121,5 +124,33 @@ namespace AddressBook_System
             foreach (string line in lines)
                 Console.WriteLine(line);
         }
+
+        public void WriteToCSVFile()
+        {
+            string filename = @"D:\bridgelabz\AddressBook_System\AddressBook_System\Addresses.csv";
+            using (var writer = new StreamWriter(filename))
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                var headings = new List<string>(addressbook.Keys);
+
+                foreach (var heading in headings)
+                {
+                    csv.WriteField(heading);
+                }
+
+                csv.NextRecord();
+
+                foreach (var item in addressbook)
+                {
+                    csv.WriteField(item.Value);
+                }
+                    
+
+                    csv.NextRecord();
+                
+            }
+        }
+
+        
     }
 }
