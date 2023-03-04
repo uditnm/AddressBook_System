@@ -16,7 +16,8 @@ namespace AddressBook_System
                 Console.WriteLine("\n1.Add Contact \n2.View Contacts \n3.Edit Contacts \n4.Delete Contact " +
                     "\n5.Add new AddressBook \n6.View Address books \n7.Search for people in a city or state \n8.View persons by city " +
                     "\n9.View persons by state \n10.Display count by city \n11.Display count by state \n12.Sort " +
-                    "person details by name \n13. Sort person details by place \n14.Exit");
+                    "person details by name \n13.Sort person details by place \n14.Write Address Book to file \n15.Read Address " +
+                    "Book from file \n16.Exit");
                 int ch = Convert.ToInt32(Console.ReadLine());
                 switch (ch)
                 {
@@ -39,7 +40,8 @@ namespace AddressBook_System
                     case 5:
                         Console.WriteLine("Enter name for address book");
                         string addressbookname = Console.ReadLine();
-                        addressbooks.AddToAddressBook(addressbookname, addressbook);
+                        addressbooks.AddToAddressBook(addressbookname, addressbook.contacts);
+                        addressbook.contacts.Clear();
                         break;
                     case 6:
                         addressbooks.DisplayAddressBooks();
@@ -68,6 +70,12 @@ namespace AddressBook_System
                         addressbook.SortContactsbyPlace();
                         break;
                     case 14:
+                        addressbooks.WriteToFile();
+                        break;
+                    case 15:
+                        addressbooks.ReadFromFile();
+                        break;
+                    case 16:
                         t = false;
                         break;
 

@@ -1,0 +1,22 @@
+MyAddressBook
+---------------------
+firstName: Udit
+lastName: Mishra
+address: abcd
+city: Bengaluru
+state: Karnataka
+zip: 560037
+phone number: 1234567891
+email: abc@def
+
+
+firstName: Aman
+lastName: Kumar
+address: souht
+city: Delhi
+state: Delhi
+zip: 234567
+phone number: 9876543212
+email: sde@erf
+
+

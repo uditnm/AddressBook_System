@@ -13,11 +13,10 @@ namespace AddressBook_System
         public Dictionary<string, List<Contacts>> stateContacts = new Dictionary<string, List<Contacts>>();
 
 
-        public void AddToAddressBook(string name, AddressBook contact)
+        public void AddToAddressBook(string name, List<Contacts> contact)
         {
-            addressbook.Add(name, contact.contacts);
-            contact.contacts.Clear();
-
+            List<Contacts> contacts = new List<Contacts>(contact);
+            addressbook.Add(name, contacts);
         }
 
         public void DisplayAddressBooks()
@@ -26,7 +25,7 @@ namespace AddressBook_System
             {
                 Console.WriteLine(contacts.Key);
                 Console.WriteLine("---------------------");
-                foreach (Contacts contact in contacts.Value)
+                foreach (var contact in contacts.Value)
                 {
                     Console.WriteLine(contact.ToString());
                     Console.WriteLine("\n");
@@ -95,6 +94,32 @@ namespace AddressBook_System
                 Console.WriteLine(contacts.Key);
                 Console.WriteLine(contacts.Value.Count);
             }
+        }
+
+        public void WriteToFile()
+        {
+            string filename = @"D:\bridgelabz\AddressBook_System\AddressBook_System\Addresses.txt";
+            StreamWriter sw = new StreamWriter(filename);
+            foreach (var contacts in addressbook)
+            {
+                sw.WriteLine(contacts.Key);
+                sw.WriteLine("---------------------");
+                foreach (Contacts contact in contacts.Value)
+                {
+                    sw.WriteLine(contact.ToString());
+                    sw.WriteLine("\n");
+                }
+            }
+            sw.Close();
+        }
+
+        public void ReadFromFile()
+        {
+            string filename = @"D:\bridgelabz\AddressBook_System\AddressBook_System\Addresses.txt";
+            string[] lines = File.ReadAllLines(filename);
+
+            foreach (string line in lines)
+                Console.WriteLine(line);
         }
     }
 }

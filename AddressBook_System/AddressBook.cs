@@ -28,7 +28,7 @@ namespace AddressBook_System
             Console.WriteLine("Enter the email: ");
             string email = Console.ReadLine();
 
-            Contacts contact = new Contacts(firstName, lastName, address, city, state,zip, phoneno,email);
+            Contacts contact = new Contacts(firstName, lastName, address, city, state, zip, phoneno, email);
 
             if (CheckDuplicate(contact))
             {
@@ -111,6 +111,7 @@ namespace AddressBook_System
             {
                 Console.WriteLine("Contact {0}", id);
                 Console.WriteLine(contact.ToString());
+                Console.WriteLine("\n");
                 id++;
             }
             
