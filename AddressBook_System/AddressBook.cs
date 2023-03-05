@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +12,7 @@ namespace AddressBook_System
     internal class AddressBook
     {
         public List<Contacts> contacts = new List<Contacts>();
+        string constring = ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString;
         public void AddContact(AddressBooks addressbooks)
         {
             Console.WriteLine("Enter the firstName: ");
@@ -58,6 +62,43 @@ namespace AddressBook_System
                 
             }
             
+        }
+
+        public void ReadContactFromDB()
+        {
+            SqlConnection con = null;
+            try
+            {
+                con = new SqlConnection(constring);
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = con;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "spViewAddresses";
+
+                con.Open();
+                SqlDataReader sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    Console.WriteLine(sdr["firstname"]);
+                    Console.WriteLine(sdr["lastname"]);
+                    Console.WriteLine(sdr["address"]);
+                    Console.WriteLine(sdr["city"]);
+                    Console.WriteLine(sdr["state"]);
+                    Console.WriteLine(sdr["zip"]);
+                    Console.WriteLine(sdr["phonenumber"]);
+                    Console.WriteLine(sdr["email"]);
+                    Console.WriteLine();
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("OOPs, something went wrong." + e);
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         public void EditContact(string firstname)
