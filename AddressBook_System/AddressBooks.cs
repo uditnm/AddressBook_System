@@ -1,4 +1,6 @@
 ﻿using CsvHelper;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Formats.Asn1;
@@ -149,6 +151,36 @@ namespace AddressBook_System
                     csv.NextRecord();
                 
             }
+        }
+
+        public void WriteToJSONFile()
+        {
+            string jsonfile = @"D:\bridgelabz\AddressBook_System\AddressBook_System\Addresses.json";
+            var json = JsonConvert.SerializeObject(addressbook);
+            File.WriteAllText(jsonfile, json);
+        }
+
+        public void ReadFromJSONFile()
+        {
+            string jsonfile = @"D:\bridgelabz\AddressBook_System\AddressBook_System\Addresses.json";
+            JObject jsoncontacts = JObject.Parse(File.ReadAllText(jsonfile));
+
+            foreach (var contacts in jsoncontacts)
+            {
+                Console.WriteLine(contacts.Key);
+                Console.WriteLine("---------------------");
+                foreach (var contact in contacts.Value)
+                {
+                    foreach(var item in contact)
+                    {
+                        Console.WriteLine(item);
+                    }
+                    
+                    Console.WriteLine("\n");
+                }
+            }
+
+            
         }
 
         

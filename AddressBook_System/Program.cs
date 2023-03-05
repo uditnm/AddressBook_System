@@ -17,7 +17,8 @@ namespace AddressBook_System
                     "\n5.Add new AddressBook \n6.View Address books \n7.Search for people in a city or state \n8.View persons by city " +
                     "\n9.View persons by state \n10.Display count by city \n11.Display count by state \n12.Sort " +
                     "person details by name \n13.Sort person details by place \n14.Write Address Book to file \n15.Read Address " +
-                    "Book from file \n16.Write Address Book to CSV File \n17.Exit");
+                    "Book from file \n16.Write Address Book to CSV File \n17.Write Address Book to JSON file \n18.Read Address from JSON file " +
+                    "\n19.Exit");
                 int ch = Convert.ToInt32(Console.ReadLine());
                 switch (ch)
                 {
@@ -79,6 +80,12 @@ namespace AddressBook_System
                         addressbooks.WriteToCSVFile();
                         break;
                     case 17:
+                        addressbooks.WriteToJSONFile();
+                        break;
+                    case 18:
+                        addressbooks.ReadFromJSONFile();
+                        break;
+                    case 19:
                         t = false;
                         break;
 
