@@ -325,5 +325,62 @@ namespace AddressBook_System
             
             DisplayContact();
         }
+
+        public void RetrieveByDate()
+        {
+            SqlConnection con = null;
+            try
+            {
+                con = new SqlConnection(constring);
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = con;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "spAddressesByDate";
+
+                SqlParameter period = new SqlParameter("@period", SqlDbType.DateTime);
+                comm.Parameters.Add(period);
+                DateTime date = PromptDateTime();
+                period.Value = date;
+
+                con.Open();
+                SqlDataReader sdr = comm.ExecuteReader();
+                while (sdr.Read())
+                {
+                    Console.WriteLine("firstName: " + sdr["firstname"]);
+                    Console.WriteLine("lastName: " + sdr["lastname"]);
+                    Console.WriteLine("address: " + sdr["address"]);
+                    Console.WriteLine("city: " + sdr["city"]);
+                    Console.WriteLine("state: " + sdr["state"]);
+                    Console.WriteLine("zip: " + sdr["zip"]);
+                    Console.WriteLine("phone number: " + sdr["phonenumber"]);
+                    Console.WriteLine("email: " + sdr["email"]);
+                    Console.WriteLine("date added: " + sdr["add_date"]);
+                    Console.WriteLine();
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("OOPs, something went wrong." + e);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public static DateTime PromptDateTime()
+        {
+            Console.WriteLine("Day: ");
+            var day = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Month: ");
+            var month = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Year: ");
+            var year = Convert.ToInt32(Console.ReadLine());
+
+            return new DateTime(year, month, day);
+        }
     }
 }
