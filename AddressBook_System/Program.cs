@@ -31,7 +31,8 @@ namespace AddressBook_System
                     case 3:
                         Console.WriteLine("Enter the firstname to edit ");
                         string firstName = Console.ReadLine();
-                        addressbook.EditContact(firstName);
+                        string lastName = Console.ReadLine();
+                        addressbook.EditContact(firstName,lastName);
                         break;
                     case 4:
                         Console.WriteLine("Enter the firstname to delete ");

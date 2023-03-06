@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AddressBook_System
 {
-    internal class AddressBooks
+    public class AddressBooks
     {
         Dictionary<string, List<Contacts>> addressbook = new Dictionary<string, List<Contacts>>();
         public Dictionary<string, List<Contacts>> cityContacts = new Dictionary<string, List<Contacts>>();

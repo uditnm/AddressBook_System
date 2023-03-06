@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AddressBook_System
 {
-    internal class AddressBook
+    public class AddressBook
     {
         public List<Contacts> contacts = new List<Contacts>();
         string constring = ConfigurationManager.ConnectionStrings["DbConn"].ConnectionString;
@@ -41,6 +41,7 @@ namespace AddressBook_System
             else
             {
                 contacts.Add(contact);
+                AddContactToDB(contact);
                 if(addressbooks.cityContacts.ContainsKey(city))
                 {
                     addressbooks.cityContacts[city].Add(contact);
@@ -79,14 +80,15 @@ namespace AddressBook_System
                 SqlDataReader sdr = comm.ExecuteReader();
                 while (sdr.Read())
                 {
-                    Console.WriteLine(sdr["firstname"]);
-                    Console.WriteLine(sdr["lastname"]);
-                    Console.WriteLine(sdr["address"]);
-                    Console.WriteLine(sdr["city"]);
-                    Console.WriteLine(sdr["state"]);
-                    Console.WriteLine(sdr["zip"]);
-                    Console.WriteLine(sdr["phonenumber"]);
-                    Console.WriteLine(sdr["email"]);
+                    Console.WriteLine("firstName: " + sdr["firstname"]);
+                    Console.WriteLine("lastName: " + sdr["lastname"]);
+                    Console.WriteLine("address: " + sdr["address"]);
+                    Console.WriteLine("city: " + sdr["city"]);
+                    Console.WriteLine("state: " + sdr["state"]);
+                    Console.WriteLine("zip: " + sdr["zip"]);
+                    Console.WriteLine("phone number: " + sdr["phonenumber"]);
+                    Console.WriteLine("email: " + sdr["email"]);
+                    Console.WriteLine("date added: " + sdr["add_date"]);
                     Console.WriteLine();
 
                 }
@@ -101,11 +103,137 @@ namespace AddressBook_System
             }
         }
 
-        public void EditContact(string firstname)
+        public void AddContactToDB(Contacts contact)
+        {
+            SqlConnection con = null;
+            try
+            {
+                con = new SqlConnection(constring);
+
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = con;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "spEnterAddress";
+
+               
+                SqlParameter firstname = new SqlParameter("@firstname", SqlDbType.VarChar);
+                SqlParameter lastname = new SqlParameter("@lastname", SqlDbType.VarChar);
+                SqlParameter address = new SqlParameter("@address", SqlDbType.VarChar);
+                SqlParameter city = new SqlParameter("@city", SqlDbType.VarChar);
+                SqlParameter state = new SqlParameter("@state", SqlDbType.VarChar);
+                SqlParameter zip = new SqlParameter("@zip", SqlDbType.BigInt);
+                SqlParameter phonenumber = new SqlParameter("@phonenumber", SqlDbType.BigInt);
+                SqlParameter email = new SqlParameter("@email", SqlDbType.VarChar);
+                SqlParameter add_date = new SqlParameter("@add_date",SqlDbType.DateTime);
+                
+                
+
+                comm.Parameters.Add(firstname);
+                comm.Parameters.Add(lastname);
+                comm.Parameters.Add(address);
+                comm.Parameters.Add(city);
+                comm.Parameters.Add(state);
+                comm.Parameters.Add(zip);
+                comm.Parameters.Add(phonenumber);
+                comm.Parameters.Add(email);
+                comm.Parameters.Add(add_date);
+                
+
+                DateTime date = DateTime.Now;
+
+                firstname.Value = contact.firstname;
+                lastname.Value = contact.lastname;
+                address.Value = contact.address;
+                city.Value = contact.city;
+                state.Value = contact.state;
+                zip.Value = contact.zip;
+                phonenumber.Value = contact.phoneno;
+                email.Value = contact.email;
+                add_date.Value = date;
+
+                con.Open();
+                comm.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("OOPs, something went wrong." + e);
+            }
+            finally
+            {
+                con.Close();   
+            }
+        }
+
+        public void UpdateContactInDB(Contacts contact,string oldfirstname, string oldlastname)
+        {
+            SqlConnection con = null;
+            try
+            {
+                con = new SqlConnection(constring);
+
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = con;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "spUpdateAddress";
+
+                SqlParameter oldFirstName = new SqlParameter("@oldfirstname", SqlDbType.VarChar);
+                SqlParameter oldLastName = new SqlParameter("@oldlastname", SqlDbType.VarChar);
+                SqlParameter firstname = new SqlParameter("@firstname", SqlDbType.VarChar);
+                SqlParameter lastname = new SqlParameter("@lastname", SqlDbType.VarChar);
+                SqlParameter address = new SqlParameter("@address", SqlDbType.VarChar);
+                SqlParameter city = new SqlParameter("@city", SqlDbType.VarChar);
+                SqlParameter state = new SqlParameter("@state", SqlDbType.VarChar);
+                SqlParameter zip = new SqlParameter("@zip", SqlDbType.BigInt);
+                SqlParameter phonenumber = new SqlParameter("@phonenumber", SqlDbType.BigInt);
+                SqlParameter email = new SqlParameter("@email", SqlDbType.VarChar);
+                SqlParameter add_date = new SqlParameter("@add_date", SqlDbType.DateTime);
+
+                comm.Parameters.Add(oldFirstName);
+                comm.Parameters.Add(oldLastName);
+                comm.Parameters.Add(firstname);
+                comm.Parameters.Add(lastname);
+                comm.Parameters.Add(address);
+                comm.Parameters.Add(city);
+                comm.Parameters.Add(state);
+                comm.Parameters.Add(zip);
+                comm.Parameters.Add(phonenumber);
+                comm.Parameters.Add(email);
+                comm.Parameters.Add(add_date);
+
+
+                DateTime date = DateTime.Now;
+
+                oldFirstName.Value = oldfirstname;
+                oldLastName.Value = oldlastname;
+                firstname.Value = contact.firstname;
+                lastname.Value = contact.lastname;
+                address.Value = contact.address;
+                city.Value = contact.city;
+                state.Value = contact.state;
+                zip.Value = contact.zip;
+                phonenumber.Value = contact.phoneno;
+                email.Value = contact.email;
+                add_date.Value = date;
+
+                con.Open();
+                comm.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("OOPs, something went wrong." + e);
+            }
+            finally
+            {
+                con.Close();
+
+            }
+        }
+
+        public void EditContact(string firstname, string lastname)
         {
             foreach(Contacts contact in contacts)
             {
-                if(contact.firstname==firstname)
+                if(contact.firstname==firstname && contact.lastname==lastname)
                 {
                     Console.WriteLine("Enter the firstName: ");
                     contact.firstname = Console.ReadLine();
@@ -124,11 +252,13 @@ namespace AddressBook_System
                     Console.WriteLine("Enter the email: ");
                     contact.email = Console.ReadLine();
 
+                    UpdateContactInDB(contact,firstname,lastname);
+
                     break;
                 }
             }
 
-            Console.WriteLine("The name was not found");
+            //Console.WriteLine("The name was not found");
         }
 
         public void DeleteContact(string firstname)
