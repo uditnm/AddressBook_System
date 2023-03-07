@@ -369,7 +369,7 @@ namespace AddressBook_System
             }
         }
 
-        public static DateTime PromptDateTime()
+        public DateTime PromptDateTime()
         {
             Console.WriteLine("Day: ");
             var day = Convert.ToInt32(Console.ReadLine());
@@ -381,6 +381,68 @@ namespace AddressBook_System
             var year = Convert.ToInt32(Console.ReadLine());
 
             return new DateTime(year, month, day);
+        }
+
+        public void GetCountByCity()
+        {
+            SqlConnection con = null;
+            try
+            {
+                con = new SqlConnection(constring);
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = con;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "spAddressCountByCity";
+
+                SqlParameter city = new SqlParameter("@city", SqlDbType.VarChar);
+                comm.Parameters.Add(city);
+                Console.WriteLine("Enter the city ");
+                string cityname = Console.ReadLine();
+                city.Value = cityname;
+
+                con.Open();
+                int addresscount = (int)comm.ExecuteScalar();
+                Console.WriteLine(addresscount);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("OOPs, something went wrong." + e);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void GetCountByState()
+        {
+            SqlConnection con = null;
+            try
+            {
+                con = new SqlConnection(constring);
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = con;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "spAddressCountByState";
+
+                SqlParameter state = new SqlParameter("@state", SqlDbType.VarChar);
+                comm.Parameters.Add(state);
+                Console.WriteLine("Enter the state ");
+                string statename = Console.ReadLine();
+                state.Value = statename;
+
+                con.Open();
+                int addresscount = (int)comm.ExecuteScalar();
+                Console.WriteLine(addresscount);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("OOPs, something went wrong." + e);
+            }
+            finally
+            {
+                con.Close();
+            }
         }
     }
 }

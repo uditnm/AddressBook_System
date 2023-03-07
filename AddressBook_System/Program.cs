@@ -18,7 +18,8 @@ namespace AddressBook_System
                     "\n9.View persons by state \n10.Display count by city \n11.Display count by state \n12.Sort " +
                     "person details by name \n13.Sort person details by place \n14.Write Address Book to file \n15.Read Address " +
                     "Book from file \n16.Write Address Book to CSV File \n17.Write Address Book to JSON file \n18.Read Address from JSON file " +
-                    "\n19.Read from Database \n20.Retrieve Addresses by Date \n21.Exit");
+                    "\n19.Read from Database \n20.Retrieve Addresses by Date \n21.Get Adddress Count for a city \n22.Get Address Count for a state " +
+                    "\n23.Exit");
                 int ch = Convert.ToInt32(Console.ReadLine());
                 switch (ch)
                 {
@@ -93,6 +94,12 @@ namespace AddressBook_System
                         addressbook.RetrieveByDate();
                         break;
                     case 21:
+                        addressbook.GetCountByCity();
+                        break;
+                    case 22:
+                        addressbook.GetCountByState();
+                        break;
+                    case 23:
                         t = false;
                         break;
 
