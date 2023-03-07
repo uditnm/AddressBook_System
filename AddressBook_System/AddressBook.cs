@@ -127,7 +127,6 @@ namespace AddressBook_System
                 SqlParameter add_date = new SqlParameter("@add_date",SqlDbType.DateTime);
                 
                 
-
                 comm.Parameters.Add(firstname);
                 comm.Parameters.Add(lastname);
                 comm.Parameters.Add(address);
@@ -138,7 +137,6 @@ namespace AddressBook_System
                 comm.Parameters.Add(email);
                 comm.Parameters.Add(add_date);
                 
-
                 DateTime date = DateTime.Now;
 
                 firstname.Value = contact.firstname;
@@ -153,6 +151,8 @@ namespace AddressBook_System
 
                 con.Open();
                 comm.ExecuteNonQuery();
+
+                Console.WriteLine("Contact Added");
             }
             catch (Exception e)
             {
@@ -217,6 +217,7 @@ namespace AddressBook_System
 
                 con.Open();
                 comm.ExecuteNonQuery();
+                Console.WriteLine("Contact Updated");
             }
             catch (Exception e)
             {
@@ -258,7 +259,6 @@ namespace AddressBook_System
                 }
             }
 
-            //Console.WriteLine("The name was not found");
         }
 
         public void DeleteContact(string firstname)
@@ -271,7 +271,6 @@ namespace AddressBook_System
                     break;
                 }
             }
-            //Console.WriteLine("The name was not found");
         }
 
 
